@@ -98,8 +98,8 @@ ifeq ($(TARGET_USERIMAGES_USE_EXT4), true)
   endif
 endif
 
-ifeq ($(TARGET_KERNEL_HAVE_EXFAT),true)
-vold_cflags += -DCONFIG_KERNEL_HAVE_EXFAT
+ifneq ($(TARGET_EXFAT_DRIVER),)
+  vold_cflags += -DCONFIG_EXFAT_DRIVER=\"$(TARGET_EXFAT_DRIVER)\"
 endif
 
 ifeq ($(TARGET_KERNEL_HAVE_NTFS),true)
