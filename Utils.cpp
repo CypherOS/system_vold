@@ -540,13 +540,13 @@ bool IsFilesystemSupported(const std::string& fsType) {
         return false;
     }
 
-    /* fuse filesystems */
-    supported.append("fuse\tntfs\n");
-
 #ifdef CONFIG_EXFAT_DRIVER
     /* Add exfat if an exfat driver is present */
     if (supported.find(CONFIG_EXFAT_DRIVER "\n") != std::string::npos)
         supported.append("nodev\texfat\n");
+#else
+    /* fuse filesystems */
+    supported.append("fuse\tntfs\n""fuse\texfat\n");
 #endif
 
     return supported.find(fsType + "\n") != std::string::npos;
